@@ -1,2 +1,1 @@
-N FOR NISHU
-N FOR NAUSHI 
+tor mairi chudi
