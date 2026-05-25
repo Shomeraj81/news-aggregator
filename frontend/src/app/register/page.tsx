@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-
+import toast from "react-hot-toast";
 import api from "@/services/api";
 
 const RegisterPage = () => {
@@ -14,10 +14,11 @@ const RegisterPage = () => {
         e.preventDefault();
         try {
             await api.post("/auth/register", { username, email, password, });
+            toast.success("Registered successfully, please login");
             router.push("/login");
         }
         catch (error) {
-            console.error(error);
+            toast.error("Registration failed");
         }
     };
 

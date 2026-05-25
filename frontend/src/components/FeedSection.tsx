@@ -1,27 +1,65 @@
-import ArticleCard from "./ArticleCard";
-import { Article } from "@/types/article";
+"use client";
+
+import { ChevronRight }
+from "lucide-react";
+
+import ArticleCard
+from "./ArticleCard";
+
+import { Article }
+from "@/types/article";
+
 interface Props {
-    title: string;
-    articles: Article[];
+  title: string;
+
+  articles: Article[];
 }
+
 const FeedSection = ({
-    title,
-    articles,
+  title,
+  articles,
 }: Props) => {
-    return (
-        <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6">
-                {title}
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {articles.map((article) => (
-                    <ArticleCard
-                        key={article._id}
-                        article={article}
-                    />
-                ))}
-            </div>
-        </section>
-    );
+  if (!articles?.length) {
+    return null;
+  }
+
+  return (
+    <section className="mb-16 fade-in">
+      {/* HEADER */}
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h2 className="text-3xl font-bold tracking-tight text-black">
+            {title}
+          </h2>
+
+          <p className="text-zinc-500 mt-1">
+            Curated stories updated
+            continuously
+          </p>
+        </div>
+
+        <button className="hidden md:flex items-center gap-2 text-zinc-400 hover:text-white transition-colors">
+          View All
+
+          <ChevronRight className="w-4 h-4" />
+        </button>
+      </div>
+
+      {/* HORIZONTAL SCROLL */}
+      <div className="flex gap-6 overflow-x-auto scrollbar-hide pb-2">
+        {articles.map((article) => (
+          <div
+            key={article._id}
+            className="min-w-[320px] max-w-[320px] shrink-0"
+          >
+            <ArticleCard
+              article={article}
+            />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
 };
+
 export default FeedSection;
