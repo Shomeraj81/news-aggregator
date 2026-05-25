@@ -1,26 +1,421 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* ========================================
+   ROOT THEME VARIABLES
+======================================== */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* backgrounds */
+  --background: #0a0a0a;
+  --background-secondary: #111111;
+  --card: #18181b;
+  --card-hover: #1f1f23;
+
+  /* borders */
+  --border: #27272a;
+
+  /* text */
+  --foreground: #fafafa;
+  --foreground-secondary: #a1a1aa;
+
+  /* accents */
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+
+  /* feedback */
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+
+  /* shadows */
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.25);
+
+  /* radius */
+  --radius: 1rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ========================================
+   GLOBAL RESET
+======================================== */
+
+* {
+  border-color: var(--border);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ========================================
+   SCROLLBAR
+======================================== */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(
+    --background-secondary
+  );
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2f2f35;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+/* ========================================
+   SELECTION
+======================================== */
+
+::selection {
+  background: rgba(
+    59,
+    130,
+    246,
+    0.3
+  );
+  color: white;
+}
+
+/* ========================================
+   TYPOGRAPHY
+======================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family:
+    Geist,
+    Inter,
+    sans-serif;
+
+  letter-spacing: -0.03em;
+}
+
+p {
+  color: var(
+    --foreground-secondary
+  );
+}
+
+/* ========================================
+   LINKS
+======================================== */
+
+a {
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+a:hover {
+  opacity: 0.9;
+}
+
+/* ========================================
+   BUTTONS
+======================================== */
+
+button {
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    opacity 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* ========================================
+   INPUTS
+======================================== */
+
+input,
+textarea,
+select {
+  background: var(--card);
+  color: var(--foreground);
+
+  border: 1px solid
+    var(--border);
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--primary);
+
+  box-shadow: 0 0 0 3px
+    rgba(59, 130, 246, 0.15);
+}
+
+/* ========================================
+   CARD STYLES
+======================================== */
+
+.glass-card {
+  background: rgba(
+    24,
+    24,
+    27,
+    0.7
+  );
+
+  backdrop-filter: blur(12px);
+
+  border: 1px solid
+    rgba(255, 255, 255, 0.06);
+
+  box-shadow: var(--shadow-soft);
+}
+
+.news-card {
+  background: var(--card);
+
+  border: 1px solid
+    var(--border);
+
+  border-radius: 1.5rem;
+
+  overflow: hidden;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.news-card:hover {
+  transform: translateY(-4px);
+
+  background: var(--card-hover);
+
+  box-shadow:
+    0 10px 30px rgba(
+      0,
+      0,
+      0,
+      0.35
+    );
+}
+
+/* ========================================
+   IMAGE EFFECTS
+======================================== */
+
+.image-hover {
+  overflow: hidden;
+}
+
+.image-hover img {
+  transition:
+    transform 0.4s ease;
+}
+
+.image-hover:hover img {
+  transform: scale(1.05);
+}
+
+/* ========================================
+   GRADIENTS
+======================================== */
+
+.gradient-text {
+  background: linear-gradient(
+    to right,
+    #60a5fa,
+    #3b82f6
+  );
+
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color:
+    transparent;
+}
+
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  padding: 1px;
+
+  border-radius: inherit;
+
+  background: linear-gradient(
+    to right,
+    rgba(59, 130, 246, 0.6),
+    rgba(59, 130, 246, 0.1)
+  );
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0)
+      content-box,
+    linear-gradient(#fff 0 0);
+
+  -webkit-mask-composite: xor;
+
+  mask-composite: exclude;
+}
+
+/* ========================================
+   PROSE ARTICLE STYLING
+======================================== */
+
+.prose {
+  color: var(--foreground);
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  color: var(--foreground);
+
+  font-weight: 700;
+
+  letter-spacing: -0.03em;
+}
+
+.prose p {
+  color: #d4d4d8;
+
+  line-height: 1.9;
+}
+
+.prose strong {
+  color: white;
+}
+
+.prose a {
+  color: var(--primary);
+}
+
+.prose blockquote {
+  border-left: 4px solid
+    var(--primary);
+
+  color: #d4d4d8;
+}
+
+.prose code {
+  background: #18181b;
+
+  color: #93c5fd;
+
+  padding: 0.2rem 0.4rem;
+
+  border-radius: 0.4rem;
+}
+
+.prose pre {
+  background: #111111;
+  border: 1px solid
+    var(--border);
+}
+
+/* ========================================
+   ANIMATIONS
+======================================== */
+
+.fade-in {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   UTILITIES
+======================================== */
+
+.section-padding {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.max-content-width {
+  max-width: 1400px;
+  margin-inline: auto;
+}
+
+/* ========================================
+   MOBILE OPTIMIZATIONS
+======================================== */
+
+@media (max-width: 768px) {
+  .prose {
+    font-size: 1rem;
+  }
+
+  .prose h1 {
+    font-size: 2rem;
+  }
+
+  .prose h2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Hide scrollbar */
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }

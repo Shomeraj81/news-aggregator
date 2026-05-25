@@ -4,6 +4,8 @@ import generateToken from "../utils/generateToken.js";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import sendEmail from "../utils/sendEmail.js";
+import generateAccessToken from "../utils/generateAccessToken.js";
+import generateRefreshToken from "../utils/generateRefreshToken.js";
 
 // REGISTER
 export const registerUser = async (req, res) => {

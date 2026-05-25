@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import api from "@/services/api";
 import FeedSection from "@/components/FeedSection";
 import Navbar from "@/components/Navbar";
+import FeedSkeleton from "@/components/FeedSkeleton";
+import HeroSection from "@/components/HeroSection";
 const HomePage = () => {
     const [data, setData] = useState<any>(null);
     useEffect(() => {
@@ -20,8 +22,8 @@ const HomePage = () => {
     }, []);
     if (!data) {
         return (
-            <div className="p-10 text-center">
-                Loading...
+            <div className="p-6">
+                <FeedSkeleton />
             </div>
         );
     }
@@ -29,6 +31,9 @@ const HomePage = () => {
         <div className="bg-gray-100 min-h-screen">
             <Navbar />
             <div className="max-w-7xl mx-auto p-6">
+                <HeroSection
+                    article={data.trending?.[0]}
+                />
                 <FeedSection
                     title="Trending"
                     articles={data.trending}

@@ -71,6 +71,16 @@ const articleSchema = new mongoose.Schema(
             type: Number,
             default: 0,
         },
+
+        fullContent: {
+            type: String,
+            default: "",
+        },
+
+        contentExtracted: {
+            type: Boolean,
+            default: false,
+        },
     },
     {
         timestamps: true,
@@ -78,12 +88,12 @@ const articleSchema = new mongoose.Schema(
 );
 
 articleSchema.index({
-  title: "text",
-  description: "text",
-  content: "text",
-  source: "text",
-  category: "text",
-  author: "text",
+    title: "text",
+    description: "text",
+    content: "text",
+    source: "text",
+    category: "text",
+    author: "text",
 });
 
 const Article = mongoose.model(
