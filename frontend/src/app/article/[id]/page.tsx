@@ -7,6 +7,8 @@ import ArticleSkeleton from "@/components/ArticleSkeleton";
 import { toast } from "react-hot-toast/headless";
 import RelatedArticles from "@/components/RelatedArticles";
 import ShareButtons from "@/components/ShareButtons";
+import Comments from "@/components/Comments";
+
 const ArticlePage = () => {
     const params = useParams();
     const [article, setArticle] = useState<any>(null);
@@ -151,6 +153,7 @@ const ArticlePage = () => {
                 <RelatedArticles
                     articles={relatedArticles}
                 />
+                <Comments articleId={params.id as string} />
             </main>
         </div>
     );

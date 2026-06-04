@@ -12,6 +12,7 @@ import connectDB from "./config/db.js";
 
 import authRoutes from "./routes/authRoutes.js";
 import articleRoutes from "./routes/articleRoutes.js";
+import commentRoutes from "./routes/commentRoutes.js";
 
 import fetchNews from "./services/newsService.js";
 import startNewsCron from "./jobs/newsCron.js";
@@ -39,7 +40,7 @@ app.use(cookieParser());
 app.use(passport.initialize());
 // ROUTES
 app.use("/api/auth", authRoutes);
-
+app.use("/api/comments", commentRoutes);
 
 app.get("/", (req, res) => {
   res.send("API Running");
