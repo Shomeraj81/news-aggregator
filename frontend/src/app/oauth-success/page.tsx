@@ -1,26 +1,16 @@
 "use client";
 
-import { useEffect } from "react";
-import {
-  useRouter,
-  useSearchParams,
-} from "next/navigation";
+import { useEffect, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
-export default function OAuthSuccess() {
+const OAuthHandler = () => {
   const router = useRouter();
-  const searchParams =
-    useSearchParams();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    const token =
-      searchParams.get("token");
-
+    const token = searchParams.get("token");
     if (token) {
-      localStorage.setItem(
-        "accessToken",
-        token
-      );
-
+      localStorage.setItem("accessToken", token);
       router.replace("/home");
     } else {
       router.replace("/login");
@@ -28,8 +18,20 @@ export default function OAuthSuccess() {
   }, [searchParams, router]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="min-h-screen bg-black flex items-center justify-center text-white">
       Signing you in...
     </div>
+  );
+};
+
+export default function OAuthSuccess() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-black flex items-center justify-center text-white">
+        Loading...
+      </div>
+    }>
+      <OAuthHandler />
+    </Suspense>
   );
 }
