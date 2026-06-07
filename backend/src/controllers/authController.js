@@ -121,13 +121,13 @@ export const loginUser = async (req, res) => {
     }
 
     // uncomment this when email verification is fully tested
-    /*
+    
     if (!user.isVerified) {
       return res.status(401).json({
         message: "Please verify your email first",
       });
     }
-    */
+    
 
     const accessToken = generateAccessToken(user._id);
     const refreshToken = generateRefreshToken(user._id);
