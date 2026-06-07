@@ -75,11 +75,14 @@ const userSchema = new mongoose.Schema(
         },
       },
     ],
+    digestSubscribed: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: true,
-  },
-
+  }
 );
 
 const User = mongoose.model("User", userSchema);

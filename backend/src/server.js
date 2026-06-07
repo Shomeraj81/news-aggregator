@@ -18,6 +18,7 @@ import fetchNews from "./services/newsService.js";
 import startNewsCron from "./jobs/newsCron.js";
 import fetchRSSFeeds from "./services/rssService.js";
 import startTrendingCron from "./jobs/trendingCron.js";
+import startDigestCron from "./jobs/digestCron.js";
 
 import userRoutes from "./routes/userRoutes.js";
 import homeRoutes from "./routes/homeRoutes.js";
@@ -67,6 +68,7 @@ const startServer = async () => {
 
     startNewsCron();
     startTrendingCron();
+    startDigestCron();
 
   } catch (error) {
     console.error(error);
