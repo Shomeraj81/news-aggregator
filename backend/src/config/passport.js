@@ -1,7 +1,7 @@
 import passport from "passport";
 
 import { Strategy as GoogleStrategy }
-from "passport-google-oauth20";
+  from "passport-google-oauth20";
 
 import User from "../models/User.js";
 
@@ -16,7 +16,7 @@ passport.use(
         process.env.GOOGLE_CLIENT_SECRET,
 
       callbackURL:
-        "/api/auth/google/callback",
+        `${process.env.BACKEND_URL}/api/auth/google/callback`,
     },
 
     async (
