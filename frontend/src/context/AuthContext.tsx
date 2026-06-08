@@ -67,12 +67,6 @@ export const AuthProvider = ({
               "accessToken"
             );
 
-            console.log(
-            "Stored token:",
-            localStorage.getItem(
-              "accessToken"
-            )
-          );
 
           if (!token) {
             setLoading(false);
@@ -90,24 +84,46 @@ export const AuthProvider = ({
 
           setIsLoggedIn(true);
         } catch (error: any) {
-          console.log(
-            "Failed URL:",
-            error.config?.url
-          );
+          if (
+            error.response?.status === 401
+          ) {
+            try {
+              const refreshResponse =
+                await api.post(
+                  "/auth/refresh"
+                );
 
-          console.log(
-            "Status:",
-            error.response?.status
-          );
+              const newToken =
+                refreshResponse.data
+                  .accessToken;
 
-          console.error(error);
+              localStorage.setItem(
+                "accessToken",
+                newToken
+              );
 
-          localStorage.removeItem(
-            "accessToken"
-          );
+              const userResponse =
+                await api.get(
+                  "/auth/me"
+                );
 
-          setUser(null);
-          setIsLoggedIn(false);
+              setUser(
+                userResponse.data
+              );
+
+              setIsLoggedIn(true);
+
+              return;
+            } catch {
+              localStorage.removeItem(
+                "accessToken"
+              );
+
+              setUser(null);
+
+              setIsLoggedIn(false);
+            }
+          }
         } finally {
           setLoading(false);
         }
