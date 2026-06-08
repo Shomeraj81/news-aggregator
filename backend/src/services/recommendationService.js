@@ -24,7 +24,7 @@ export const trackReadingHistory =
         user.readingHistory.some(
           (item) =>
             item.article.toString() ===
-            articleId
+            articleId.toString()
         );
 
       if (!alreadyExists) {

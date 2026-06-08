@@ -76,7 +76,7 @@ const LoginPage = () => {
 
           {/* Google OAuth */}
           <a
-            href={`${process.env.NEXT_PUBLIC_API_URL?.replace("/api", "")}/api/auth/google`}
+            href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/google`}
             className="block text-center border border-zinc-700 hover:border-zinc-500 text-zinc-300 hover:text-white py-3 rounded-xl transition-colors"
           >
             Continue with Google

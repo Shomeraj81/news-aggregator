@@ -1,37 +1,74 @@
 "use client";
 
-import { useEffect, Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import {
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 
-const OAuthHandler = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    const token = searchParams.get("token");
-    if (token) {
-      localStorage.setItem("accessToken", token);
-      router.replace("/home");
-    } else {
-      router.replace("/login");
-    }
-  }, [searchParams, router]);
-
-  return (
-    <div className="min-h-screen bg-black flex items-center justify-center text-white">
-      Signing you in...
-    </div>
-  );
-};
+import api from "@/services/api";
+import { useAuth } from "@/context/AuthContext";
 
 export default function OAuthSuccess() {
+  const router = useRouter();
+
+  const searchParams =
+    useSearchParams();
+
+  const {
+    setUser,
+    setIsLoggedIn,
+  } = useAuth();
+
+  useEffect(() => {
+    const handleOAuth =
+      async () => {
+        const token =
+          searchParams.get("token");
+
+        if (!token) {
+          router.replace("/login");
+          return;
+        }
+
+        localStorage.setItem(
+          "accessToken",
+          token
+        );
+
+        try {
+          const response =
+            await api.get(
+              "/auth/me"
+            );
+
+          setUser(
+            response.data
+          );
+
+          setIsLoggedIn(true);
+
+          router.replace(
+            "/home"
+          );
+        } catch {
+          router.replace(
+            "/login"
+          );
+        }
+      };
+
+    handleOAuth();
+  }, [
+    router,
+    searchParams,
+    setUser,
+    setIsLoggedIn,
+  ]);
+
   return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-black flex items-center justify-center text-white">
-        Loading...
-      </div>
-    }>
-      <OAuthHandler />
-    </Suspense>
+    <div className="min-h-screen flex items-center justify-center">
+      Signing you in...
+    </div>
   );
 }

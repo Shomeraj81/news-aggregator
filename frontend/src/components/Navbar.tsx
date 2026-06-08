@@ -99,10 +99,6 @@ const Navbar = () => {
                 <Bookmark className="w-4 h-4" />
                 Bookmarks
               </Link>
-
-              <Link href="/dashboard" className="flex items-center gap-1.5 text-zinc-400 hover:text-white transition-colors text-sm">
-                Dashboard
-              </Link>
             </>
           )}
 
@@ -124,7 +120,7 @@ const Navbar = () => {
             </div>
           ) : (
             <div className="flex items-center gap-4">
-              <Link href="/profile" className="text-black bg-zinc-300 px-4 py-2 rounded-xl">
+              <Link href="/dashboard" className="text-black bg-zinc-300 px-4 py-2 rounded-xl">
                 {user?.username}
               </Link>
 
