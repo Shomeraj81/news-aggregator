@@ -112,11 +112,7 @@ This creates a personalized news feed for each user.
 
 ## 👨‍💻 Author
 
-**Sarthak Pattnaik**
 
-* LinkedIn: https://www.linkedin.com/in/sarthak-pattnaik-348ba72a9/
-* Portfolio: https://sarthak-pattnaik-portfolio.vercel.app
-* GitHub: https://github.com/Sarthak-Pattnaik
 
 ## ⭐ Support
 
